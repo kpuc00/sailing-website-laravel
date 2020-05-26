@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Coach;
+use App\Course;
 use Illuminate\Http\Request;
 
 class CoachesController extends Controller
@@ -14,7 +15,8 @@ class CoachesController extends Controller
      */
     public function index()
     {
-        //
+        $coaches = Coach::all();
+        return view('coach.index', compact('coaches'));
     }
 
     /**
@@ -24,7 +26,9 @@ class CoachesController extends Controller
      */
     public function create()
     {
-        //
+        $coach = new Coach();
+        $courses = Course::whereNull('coachId');
+        return view('coach.create', compact('coach','courses'));
     }
 
     /**
@@ -35,7 +39,7 @@ class CoachesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Coach::create($this->validateRequest());
     }
 
     /**
@@ -46,7 +50,7 @@ class CoachesController extends Controller
      */
     public function show(Coach $coach)
     {
-        //
+        return view('coach.show', compact('coach'));
     }
 
     /**
@@ -57,7 +61,8 @@ class CoachesController extends Controller
      */
     public function edit(Coach $coach)
     {
-        //
+        $courses = Course::whereNull('coachId');
+        return view('coach.edit', compact('coach', 'courses'));
     }
 
     /**
@@ -69,7 +74,8 @@ class CoachesController extends Controller
      */
     public function update(Request $request, Coach $coach)
     {
-        //
+        $coach->update($this->validateRequest());
+        return redirect('coach/'.$coach->id);
     }
 
     /**
@@ -80,6 +86,16 @@ class CoachesController extends Controller
      */
     public function destroy(Coach $coach)
     {
-        //
+        $coach->delete();
+        return redirect('coach.index');
+    }
+
+    private function validateRequest() {
+        return request()->validate([
+            'firstName' => 'required',
+            'lastName' => 'required',
+            'description' => 'required|max:256',
+            'courseId' => 'nullable',
+        ]);
     }
 }

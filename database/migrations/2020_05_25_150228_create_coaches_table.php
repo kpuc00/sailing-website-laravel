@@ -18,6 +18,8 @@ class CreateCoachesTable extends Migration
             $table->string('firstName');
             $table->string('lastName');
             $table->string('description');
+            $table->string('image')->nullable();
+            $table->unsignedInteger('courseId')->nullable();
             $table->timestamps();
         });
     }

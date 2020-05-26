@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Competitor;
 use App\Regatta;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class RegattasController extends Controller
      */
     public function index()
     {
-        //
+        $regattas = Regatta::all();
+        return view('regatta.index', compact('regattas'));
     }
 
     /**
@@ -24,7 +26,8 @@ class RegattasController extends Controller
      */
     public function create()
     {
-        //
+        $regatta = new Regatta();
+        return view('regatta.create', compact('regatta'));
     }
 
     /**
@@ -35,7 +38,7 @@ class RegattasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Regatta::creat($this->validateRequest());
     }
 
     /**
@@ -46,7 +49,8 @@ class RegattasController extends Controller
      */
     public function show(Regatta $regatta)
     {
-        //
+        $competitors = Competitor::where('regattaId', $regatta->id)->get();
+        return view('regatta.show', compact('competitors'));
     }
 
     /**
@@ -57,7 +61,7 @@ class RegattasController extends Controller
      */
     public function edit(Regatta $regatta)
     {
-        //
+        return view('regatta.edit', compact('regatta'));
     }
 
     /**
@@ -69,7 +73,7 @@ class RegattasController extends Controller
      */
     public function update(Request $request, Regatta $regatta)
     {
-        //
+        $regatta->update($this->validateRequest());
     }
 
     /**
@@ -80,6 +84,14 @@ class RegattasController extends Controller
      */
     public function destroy(Regatta $regatta)
     {
-        //
+        Competitor::where('regattaId', $regatta->id)->delete();
+        $regatta->delete();
+        return redirect('regatta.index');
+    }
+
+    private function validateRequest() {
+        return request()->validate([
+            'name' => 'required',
+        ]);
     }
 }

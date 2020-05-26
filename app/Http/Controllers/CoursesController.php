@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Coach;
 use App\Course;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class CoursesController extends Controller
      */
     public function index()
     {
-        //
+        $courses = Course::all();
+        return view('course.index', compact('courses'));
     }
 
     /**
@@ -24,7 +26,9 @@ class CoursesController extends Controller
      */
     public function create()
     {
-        //
+        $course = new Course();
+        $coaches = Coach::whereNull('courseId');
+        return view('course.create', compact('course', 'coaches'));
     }
 
     /**
@@ -35,7 +39,8 @@ class CoursesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Course::create($this->validateRequest());
+        return redirect();
     }
 
     /**
@@ -46,7 +51,7 @@ class CoursesController extends Controller
      */
     public function show(Course $course)
     {
-        //
+        return view('course.show', compact('course'));
     }
 
     /**
@@ -57,7 +62,8 @@ class CoursesController extends Controller
      */
     public function edit(Course $course)
     {
-        //
+        $coaches = Coach::whereNull('courseId');
+        return view('course.edit', compact('coaches'));
     }
 
     /**
@@ -69,7 +75,7 @@ class CoursesController extends Controller
      */
     public function update(Request $request, Course $course)
     {
-        //
+        $course->update($this->validateRequest());
     }
 
     /**
@@ -80,6 +86,15 @@ class CoursesController extends Controller
      */
     public function destroy(Course $course)
     {
-        //
+        $course->delete();
+        return redirect('course.index');
+    }
+
+    private function validateRequest() {
+        return request()->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'coachId' => 'nullable',
+        ]);
     }
 }

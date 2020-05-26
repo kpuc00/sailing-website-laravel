@@ -14,7 +14,8 @@ class CompetitorsController extends Controller
      */
     public function index()
     {
-        //
+        $competitors = Competitor::all();
+        return view('competiotor.index', compact('competitors'));
     }
 
     /**
@@ -24,7 +25,8 @@ class CompetitorsController extends Controller
      */
     public function create()
     {
-        //
+        $competitor = new Competitor();
+        return view('competitor.create', compact('competitor'));
     }
 
     /**
@@ -35,7 +37,7 @@ class CompetitorsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Competitor::create($this->validateRequest());
     }
 
     /**
@@ -46,7 +48,7 @@ class CompetitorsController extends Controller
      */
     public function show(Competitor $competitor)
     {
-        //
+        return view('competitor.show', compact('competitor'));
     }
 
     /**
@@ -57,7 +59,7 @@ class CompetitorsController extends Controller
      */
     public function edit(Competitor $competitor)
     {
-        //
+        // Not needed
     }
 
     /**
@@ -69,7 +71,7 @@ class CompetitorsController extends Controller
      */
     public function update(Request $request, Competitor $competitor)
     {
-        //
+        // Not needed
     }
 
     /**
@@ -80,6 +82,15 @@ class CompetitorsController extends Controller
      */
     public function destroy(Competitor $competitor)
     {
-        //
+        // Not needed
+    }
+
+    private function validateRequest() {
+        return request()->validate([
+            'firstName' => 'required',
+            'lastName' => 'required',
+            'age' => 'required',
+            'regattaId' =>'required',
+        ]);
     }
 }
