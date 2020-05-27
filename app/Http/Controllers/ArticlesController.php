@@ -94,7 +94,7 @@ class ArticlesController extends Controller
     private function validateRequest() {
         return tap(request()->validate([
                 'title' => 'required|max:256',
-                'content' => 'required|max:1024',
+                'content' => 'required|min:256:max:2048',
                 'image' => 'nullable',
                 'user_id' => 'required',
             ]), function() {

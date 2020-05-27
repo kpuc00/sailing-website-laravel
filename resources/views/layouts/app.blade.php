@@ -21,11 +21,16 @@
 </head>
 <body>
     <div id="app">
-        @include('layouts.nav')
 
-        <main class="py-4">
+        <!-- Navbar -->
+        @include('layouts.navbar')
+
+        <div class="container">
             @yield('content')
-        </main>
+        </div>'
+
+        <!-- Footer -->
+        @include('layouts.footer')
     </div>
 </body>
 </html>

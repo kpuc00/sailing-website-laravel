@@ -39,6 +39,7 @@ class RegattasController extends Controller
     public function store(Request $request)
     {
         Regatta::creat($this->validateRequest());
+        return redirect('regatta.ingex');
     }
 
     /**
@@ -49,7 +50,7 @@ class RegattasController extends Controller
      */
     public function show(Regatta $regatta)
     {
-        $competitors = Competitor::where('regattaId', $regatta->id)->get();
+        $competitors = Competitor::where('regatta_id', $regatta->id)->get();
         return view('regatta.show', compact('competitors'));
     }
 
