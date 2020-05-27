@@ -19,8 +19,10 @@ class CreateCompetitorsTable extends Migration
             $table->string('lastName');
             $table->integer('age');
             $table->string('club');
-            $table->unsignedInteger('regattaId');
+            $table->unsignedBigInteger('regatta_id')->index();
             $table->timestamps();
+
+            $table->foreign('regatta_id')->references('id')->on('regattas');
         });
     }
 

@@ -41,3 +41,6 @@ Route::resource('competitor', 'CompetitorsController');
 
 // Regatta routes
 Route::resource('regatta', 'RegattasController');
+
+// Article routes
+Route::resource('article', 'ArticlesController');

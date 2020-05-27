@@ -27,7 +27,7 @@ class CoursesController extends Controller
     public function create()
     {
         $course = new Course();
-        $coaches = Coach::whereNull('courseId');
+        $coaches = Coach::whereNull('courseId'); //Change this line
         return view('course.create', compact('course', 'coaches'));
     }
 
@@ -39,8 +39,9 @@ class CoursesController extends Controller
      */
     public function store(Request $request)
     {
-        Course::create($this->validateRequest());
-        return redirect();
+        $course = Course::create($this->validateRequest());
+        $this->storeImage($course);
+        return redirect('course.index');
     }
 
     /**
@@ -76,6 +77,8 @@ class CoursesController extends Controller
     public function update(Request $request, Course $course)
     {
         $course->update($this->validateRequest());
+        $this->storeImage($course);
+        return redirect('course.index');
     }
 
     /**
@@ -91,10 +94,25 @@ class CoursesController extends Controller
     }
 
     private function validateRequest() {
-        return request()->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'coachId' => 'nullable',
-        ]);
+        return tap(request()->validate([
+                'name' => 'required',
+                'description' => 'required',
+                'coachId' => 'nullable',
+            ]), function() {
+                if(request()->has('image')) {
+                    request()->validate([
+                        'image' => 'file|image|max:5000',
+                    ]);
+                }
+            }
+        );
+    }
+
+    private function storeImage($course) {
+        if(request()->has('image')) {
+            $course->update([
+                'image' => request()->image->store('course-img', 'public'),
+            ]);
+        }
     }
 }

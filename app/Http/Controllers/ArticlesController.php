@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Coach;
-use App\Course;
+use App\Article;
 use Illuminate\Http\Request;
 
-class CoachesController extends Controller
+class ArticlesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,9 @@ class CoachesController extends Controller
      */
     public function index()
     {
-        $coaches = Coach::all();
-        return view('coach.index', compact('coaches'));
+        $articles = Article::orderBy('created_at');
+        return view('article.index', compact('articles'));
+
     }
 
     /**
@@ -26,9 +26,8 @@ class CoachesController extends Controller
      */
     public function create()
     {
-        $coach = new Coach();
-        $courses = Course::whereNull('coachId');
-        return view('coach.create', compact('coach','courses'));
+        $article = new Article();
+        return view('article.create', compact('article'));
     }
 
     /**
@@ -39,66 +38,65 @@ class CoachesController extends Controller
      */
     public function store(Request $request)
     {
-        $coach = Coach::create($this->validateRequest());
-        $this->storeImage($coach);
-        return redirect('coach.index');
+        $article = Article::create($this->validateRequest());
+        $this->storeImage($article);
+        return redirect('article.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Coach  $coach
+     * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function show(Coach $coach)
+    public function show(Article $article)
     {
-        return view('coach.show', compact('coach'));
+        return view('article.show', compact('article'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Coach  $coach
+     * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function edit(Coach $coach)
+    public function edit(Article $article)
     {
-        $courses = Course::whereNull('coachId');
-        return view('coach.edit', compact('coach', 'courses'));
+        return view('article.edit', compact('artilce'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Coach  $coach
+     * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Coach $coach)
+    public function update(Request $request, Article $article)
     {
-        $coach->update($this->validateRequest());
-        $this->storeImage($coach);
-        return redirect('coach/'.$coach->id);
+        $article->update($this->validateRequest());
+        $this->storeImage($article);
+        return redirect('article.show/'.$request->id);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Coach  $coach
+     * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Coach $coach)
+    public function destroy(Article $article)
     {
-        $coach->delete();
-        return redirect('coach.index');
+        $article->delete();
+        return redirect('article.index');
     }
 
     private function validateRequest() {
         return tap(request()->validate([
-                'firstName' => 'required',
-                'lastName' => 'required',
-                'description' => 'required|max:1024k',
-                'courseId' => 'nullable',
+                'title' => 'required|max:256',
+                'content' => 'required|max:1024',
+                'image' => 'nullable',
+                'user_id' => 'required',
             ]), function() {
                 if(request()->hasFile('image')) {
                     request()->validate([
@@ -109,10 +107,10 @@ class CoachesController extends Controller
         );
     }
 
-    private function storeImage($coach) {
+    private function storeImage($article) {
         if(request()->has('image')) {
-            $coach->update([
-                'image' => request()->image->store('coach-img', 'public')
+            $article->update([
+                'image' => request()->image->store('article-img', 'public')
             ]);
         }
     }
