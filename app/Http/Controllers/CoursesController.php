@@ -39,6 +39,7 @@ class CoursesController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
         $course = Course::create($this->validateRequest());
         $this->storeImage($course);
         return redirect('course.index');
@@ -52,8 +53,7 @@ class CoursesController extends Controller
      */
     public function show(Course $course)
     {
-        $coach = $course->coach;
-        return view('course.show', compact('course', 'coach'));
+        return view('course.show', compact('course'));
     }
 
     /**

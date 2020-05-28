@@ -50,8 +50,7 @@ class RegattasController extends Controller
      */
     public function show(Regatta $regatta)
     {
-        $competitors = Competitor::where('regatta_id', $regatta->id)->get();
-        return view('regatta.show', compact('competitors'));
+        return view('regatta.show', compact('regatta'));
     }
 
     /**

@@ -8,8 +8,8 @@ class Article extends Model
 {
     protected $guarded = [];
 
-    public static function GetThreeArticles() {
-        return Article::orderBy('created_at', 'desc')->take(3)->get();
+    public static function GetArticles($amount) {
+        return Article::orderBy('created_at', 'desc')->take($amount)->get();
     }
 
     public function user() {

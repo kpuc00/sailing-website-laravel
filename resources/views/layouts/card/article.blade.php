@@ -5,4 +5,4 @@
       <p class="card-text">{{ Substr($article->content, 0, strlen($article->content) - 50). '...' }}</p>
       <a href="/article/{{ $article->id }}" class="btn btn-primary">View full article</a>
     </div>
-  </div>
+</div>

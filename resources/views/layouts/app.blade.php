@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">
@@ -26,7 +27,7 @@
         @include('layouts.navbar')
 
         <div class="container">
-            @yield('content')
+                @yield('content')
         </div>'
 
         <!-- Footer -->

@@ -8,6 +8,10 @@ class Course extends Model
 {
     protected $guarded = [];
 
+    public static function GetCourses($amount) {
+        return Course::take($amount)->get();
+    }
+
     public static function GetIdName() {
         return Course::all('id', 'name');
     }

@@ -7,12 +7,59 @@
         </div>
     </div>
 
+    <!-- course -->
     <div class="row my-4">
-        @foreach (App\Article::GetThreeArticles() as $article)
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                @include('layouts.card.article')
+        <div class="row my-4">
+            <div class="col">
+                <p class="h4 text-muted">Some of our courses:</p>
             </div>
-        @endforeach
+        </div>
+
+        <div class="row mx-4">
+            @foreach (App\Course::GetCourses(6) as $course)
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    @include('layouts.card.course')
+                </div>
+            @endforeach
+        </div>
+    </div>
+
+    <hr class="mt-5">
+
+    <!-- article -->
+    <div class="row my-4">
+        <div class="row my-4">
+            <div class="col">
+                <p class="h4 text-muted">This may intrest you:</p>
+            </div>
+        </div>
+
+        <div class="row mx-4">
+            @foreach (App\Article::GetArticles(3) as $article)
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    @include('layouts.card.article')
+                </div>
+            @endforeach
+        </div>
+    </div>
+
+    <hr class="mt-5">
+
+    <!-- coach -->
+    <div class="row my-4">
+        <div class="row my-4">
+            <div class="col">
+                <p class="h4 text-muted">Our newest requitments:</p>
+            </div>
+        </div>
+
+        <div class="row mx-4">
+            @foreach (App\Coach::GetCoaches(3) as $coach)
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    @include('layouts.card.coach')
+                </div>
+            @endforeach
+        </div>
     </div>
 
     <div class="row my-4">
