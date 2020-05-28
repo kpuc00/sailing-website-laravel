@@ -37,6 +37,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function isAdmin() {
+        return $this->role == 'admin';
+    }
+
+    public function isAuthour() {
+        return $this->id == $this->article->user_id;
+    }
+
     public function article() {
         return $this->hasMany(Article::class);
     }

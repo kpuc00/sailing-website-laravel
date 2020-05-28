@@ -41,7 +41,8 @@ class CoachesController extends Controller
     {
         $coach = Coach::create($this->validateRequest());
         $this->storeImage($coach);
-        return redirect('coach.index');
+        $this->assignCourse($coach);
+        return redirect('coach/'.$coach->id);
     }
 
     /**
@@ -63,8 +64,7 @@ class CoachesController extends Controller
      */
     public function edit(Coach $coach)
     {
-        $courses = Course::whereNull('coachId');
-        return view('coach.edit', compact('coach', 'courses'));
+        return view('coach.edit', compact('coach'));
     }
 
     /**
@@ -78,6 +78,7 @@ class CoachesController extends Controller
     {
         $coach->update($this->validateRequest());
         $this->storeImage($coach);
+        $this->assignCourse($coach);
         return redirect('coach/'.$coach->id);
     }
 
@@ -90,22 +91,21 @@ class CoachesController extends Controller
     public function destroy(Coach $coach)
     {
         $coach->delete();
-        return redirect('coach.index');
+        return redirect('coach');
     }
 
     private function validateRequest() {
         return tap(request()->validate([
                 'firstName' => 'required',
                 'lastName' => 'required',
-                'description' => 'required|max:1024k',
-                'courseId' => 'nullable',
+                'description' => 'required|max:2048',
             ]), function() {
                 if(request()->hasFile('image')) {
                     request()->validate([
                         'image' => 'file|image|max:5000',
                     ]);
                 }
-            }
+            },
         );
     }
 
@@ -113,6 +113,14 @@ class CoachesController extends Controller
         if(request()->has('image')) {
             $coach->update([
                 'image' => request()->image->store('coach-img', 'public')
+            ]);
+        }
+    }
+
+    private function assignCourse($coach) {
+        if(request()->has('course_id')) {
+            $coach->update([
+                'course_id' => request()->course_id
             ]);
         }
     }

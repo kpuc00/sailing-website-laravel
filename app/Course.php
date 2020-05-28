@@ -16,6 +16,16 @@ class Course extends Model
         return Course::all('id', 'name');
     }
 
+    public static function GetAvailable() {
+        $available = array();
+        foreach(Course::all() as $course) {
+            if ($course->coach == null) {
+                array_push($available, $course);
+            }
+        }
+        return $available;
+    }
+
     public function coach() {
         return $this->hasOne(Coach::class);
     }

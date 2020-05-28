@@ -16,7 +16,7 @@ class CoursesController extends Controller
     public function index()
     {
         $courses = Course::all();
-        return view('course.index', compact('courses'));
+        return view('course', compact('courses'));
     }
 
     /**
@@ -27,8 +27,7 @@ class CoursesController extends Controller
     public function create()
     {
         $course = new Course();
-        $coaches = Coach::whereNull('courseId'); //Change this line
-        return view('course.create', compact('course', 'coaches'));
+        return view('course.create', compact('course'));
     }
 
     /**
@@ -39,10 +38,10 @@ class CoursesController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
         $course = Course::create($this->validateRequest());
         $this->storeImage($course);
-        return redirect('course.index');
+        $this->assignCoach($course);
+        return redirect('course/'.$course->id);
     }
 
     /**
@@ -64,8 +63,7 @@ class CoursesController extends Controller
      */
     public function edit(Course $course)
     {
-        $coaches = Coach::whereNull('courseId');
-        return view('course.edit', compact('coaches'));
+        return view('course.edit', compact('course'));
     }
 
     /**
@@ -79,7 +77,8 @@ class CoursesController extends Controller
     {
         $course->update($this->validateRequest());
         $this->storeImage($course);
-        return redirect('course.index');
+        $this->assignCoach($course);
+        return redirect('course/'.$course->id);
     }
 
     /**
@@ -97,8 +96,7 @@ class CoursesController extends Controller
     private function validateRequest() {
         return tap(request()->validate([
                 'name' => 'required',
-                'description' => 'required',
-                'coachId' => 'nullable',
+                'description' => 'required|min:256|max:2048',
             ]), function() {
                 if(request()->has('image')) {
                     request()->validate([
@@ -113,6 +111,14 @@ class CoursesController extends Controller
         if(request()->has('image')) {
             $course->update([
                 'image' => request()->image->store('course-img', 'public'),
+            ]);
+        }
+    }
+
+    private function assignCoach($course) {
+        if(request()->has('coach_id')) {
+            Coach::where('id', request()->coach_id)->update([
+                'course_id' => $course->id,
             ]);
         }
     }

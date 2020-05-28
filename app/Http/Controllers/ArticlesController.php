@@ -38,9 +38,10 @@ class ArticlesController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
         $article = Article::create($this->validateRequest());
         $this->storeImage($article);
-        return redirect('article.index');
+        return redirect('article/'.$article->id);
     }
 
     /**
@@ -62,7 +63,7 @@ class ArticlesController extends Controller
      */
     public function edit(Article $article)
     {
-        return view('article.edit', compact('artilce'));
+        return view('article.edit', compact('article'));
     }
 
     /**
@@ -95,7 +96,6 @@ class ArticlesController extends Controller
         return tap(request()->validate([
                 'title' => 'required|max:256',
                 'content' => 'required|min:256:max:2048',
-                'image' => 'nullable',
                 'user_id' => 'required',
             ]), function() {
                 if(request()->hasFile('image')) {
