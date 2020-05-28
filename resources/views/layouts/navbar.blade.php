@@ -25,16 +25,18 @@
             </li>
 
             <!-- Regattas nav item -->
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Regattas
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    @foreach (App\Regatta::GetIdName() as $regatta)
-                        <a class="dropdown-item" href="/regatta/{{ $regatta->id }}">{{ $regatta->name }}</a>
-                    @endforeach
-                </div>
-            </li>
+            @if (Auth::user())
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Regattas
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        @foreach (App\Regatta::GetIdName() as $regatta)
+                            <a class="dropdown-item" href="/regatta/{{ $regatta->id }}">{{ $regatta->name }}</a>
+                        @endforeach
+                    </div>
+                </li>
+            @endif
 
             <!-- Coaches nav item -->
             <li class="nav-item dropdown">
@@ -76,6 +78,7 @@
                             <a class="dropdown-item" href="/home">Home page</a>
                         </div>
 
+                        <a href="/user/{{ Auth::user()->id }}" class="dropdown-item">Profile page</a>
 
                         <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault();

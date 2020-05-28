@@ -5,6 +5,5 @@
     <form action="/course/{{ $course->id }}" method="POST" enctype="multipart/form-data">
         @method('PATCH')
         @include('course.form')
-        @csrf
     </form>
 @endsection

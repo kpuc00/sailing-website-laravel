@@ -18,6 +18,6 @@ class CheckAdmin
         if(auth()->check() && $request->user()->isAdmin()) {
             return $next($request);
         }
-        return redirect('home');
+        return redirect('login');
     }
 }

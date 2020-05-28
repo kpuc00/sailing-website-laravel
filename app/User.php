@@ -41,8 +41,9 @@ class User extends Authenticatable
         return $this->role == 'admin';
     }
 
-    public function isAuthour() {
-        return $this->id == $this->article->user_id;
+    public function isAuthour($article_id) {
+        $article = Article::where('id', $article_id)->get();
+        return $this->id == $article[0]->user_id;
     }
 
     public function article() {

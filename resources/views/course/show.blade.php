@@ -9,7 +9,21 @@
                 <blockquote class="blockquote text-center">
                     <p class="lead mb-0">{{ $course->description }}</p>
                 </blockquote>
-              </div>
+                @if (Auth::user())
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 coc-sm-6">
+                            <a href="/course/{{ $course->id }}/edit" class="btn btn-primary mt-4">Edit course</a>
+                        </div>
+                        <div class="col-lg-6 col-md-6 coc-sm-6">
+                            <form action="/course/{{ $course->id }}" method="POST">
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger mt-4 float-right d-inline">Delete</button>
+                                @csrf
+                            </form>
+                        </div>
+                    </div>
+                @endif
+            </div>
         </div>
     </div>
 

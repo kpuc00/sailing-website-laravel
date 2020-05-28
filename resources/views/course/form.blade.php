@@ -45,5 +45,6 @@
 
         <button class="btn btn-primary mt-4" type="submit">Submit</button>
 
+        @csrf
 @endsection
 

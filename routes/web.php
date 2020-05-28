@@ -23,6 +23,16 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// // User routes
+// Route::resource('user', 'CoursesController');
+
+Route::get('user', 'UsersController@index');
+// Route::get('user/create', 'UsersController@create')->middleware('checkAdmin'); // User must be itself to access this
+Route::post('user', 'UsersController@store');
+Route::get('user/{user}', 'UsersController@show');
+Route::get('user/{user}/edit', 'UsersController@edit')->middleware('checkItself'); // User must be itself to access this
+Route::patch('user/{user}', 'UsersController@update')->middleware('checkItself'); // User must be itself to access this
+Route::delete('user/{user}', 'UsersController@destroy')->middleware('checkItself'); // User must be itself to access this
 
 // // Course routes
 // Route::resource('course', 'CoursesController');
@@ -32,7 +42,7 @@ Route::get('course/create', 'CoursesController@create')->middleware('checkAdmin'
 Route::post('course', 'CoursesController@store');
 Route::get('course/{course}', 'CoursesController@show');
 Route::get('course/{course}/edit', 'CoursesController@edit')->middleware('checkAdmin'); // User must be admin to access this
-Route::patch('course/{course}', 'CoursesControler@update')->middleware('checkAdmin'); // User must be admin to access this
+Route::patch('course/{course}', 'CoursesController@update')->middleware('checkAdmin'); // User must be admin to access this
 Route::delete('course/{course}', 'CoursesController@destroy')->middleware('checkAdmin'); // User must be admin to access this
 
 
@@ -47,11 +57,29 @@ Route::get('coach/{coach}/edit', 'CoachesController@edit')->middleware('checkAdm
 Route::patch('coach/{coach}', 'CoachesController@update')->middleware('checkAdmin'); // User must be admin to access this
 Route::delete('coach/{coach}', 'CoachesController@destroy')->middleware('checkAdmin'); // User must be admin to access this
 
-// Competitor routes
-Route::resource('competitor', 'CompetitorsController');
+// // Competitor routes
+// Route::resource('competitor', 'CompetitorsController')->middleware('auth');
 
-// Regatta routes
-Route::resource('regatta', 'RegattasController');
+Route::get('competitor', 'CompetitorsController@index');
+Route::get('competitor/create', 'CompetitorsController@create')->middleware('auth'); // User must be logged in to access this
+Route::post('competitor', 'CompetitorsController@store');
+Route::get('competitor/{competitor}', 'CompetitorsController@show');
+Route::get('competitor/{competitor}/edit', 'CompetitorsController@edit')->middleware('auth'); // User must be logged in to access this
+Route::patch('competitor/{competitor}', 'CompetitorsController@update')->middleware('auth'); // User must be logged in to access this
+Route::delete('competitor/{competitor}', 'CompetitorsController@destroy')->middleware('auth'); // User must be logged in to access this
+
+// // Regatta routes
+//Route::resource('regatta', 'RegattasController');
+
+Route::get('regatta', 'RegattasController@index');
+Route::get('regatta/create', 'RegattasController@create')->middleware('checkAdmin'); // User must be admin to access this
+Route::post('regatta', 'RegattasController@store');
+Route::get('regatta/{regatta}', 'RegattasController@show');
+Route::get('regatta/{regatta}/edit', 'RegattasController@edit')->middleware('checkAdmin'); // User must be admin to access this
+Route::patch('regatta/{regatta}', 'RegattasController@update')->middleware('checkAdmin'); // User must be admin to access this
+Route::delete('regatta/{regatta}', 'RegattasController@destroy')->middleware('checkAdmin'); // User must be admin to access this
+
+
 
 // // Article routes
 // Route::resource('article', 'ArticlesController')->middleware('checkAuthour');

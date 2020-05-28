@@ -37,7 +37,8 @@ class CompetitorsController extends Controller
      */
     public function store(Request $request)
     {
-        Competitor::create($this->validateRequest());
+        $competitor = Competitor::create($this->validateRequest());
+        return redirect('regatta/'.$competitor->regatta->id);
     }
 
     /**
@@ -89,8 +90,9 @@ class CompetitorsController extends Controller
         return request()->validate([
             'firstName' => 'required',
             'lastName' => 'required',
-            'age' => 'required',
-            'regattaId' =>'required',
+            'age' => 'required|numeric|min:12|max:99',
+            'club' => 'required',
+            'regatta_id' =>'required',
         ]);
     }
 }

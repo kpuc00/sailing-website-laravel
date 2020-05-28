@@ -15,8 +15,8 @@ class CoursesController extends Controller
      */
     public function index()
     {
-        $courses = Course::all();
-        return view('course', compact('courses'));
+        $courses = Course::paginate(20);
+        return view('course.index', compact('courses'));
     }
 
     /**
@@ -89,8 +89,9 @@ class CoursesController extends Controller
      */
     public function destroy(Course $course)
     {
+        Coach::where('course_id', $course->id)->update(['course_id' => null]);
         $course->delete();
-        return redirect('course.index');
+        return redirect('home');
     }
 
     private function validateRequest() {

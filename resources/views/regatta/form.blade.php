@@ -1,14 +1,18 @@
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <form>
-            <div class="form-group">
-              <label for="formGroupExampleInput">Example label</label>
-              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
-            </div>
-            <div class="form-group">
-              <label for="formGroupExampleInput2">Another label</label>
-              <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
-            </div>
-          </form>
-    </div>
-</div>
+@extends('layouts.form')
+
+@section('form')
+
+        <!-- regatta name -->
+        <div class="form-group">
+            <label for="">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ old('name') ?? $regatta->name }}">
+            @if($errors->has('name'))
+                <div class="alert alert-warning" role="alert">{{ $errors->first('name') }}</div>
+            @endif
+        </div>
+
+        <button class="btn btn-primary mt-4" type="submit">Submit</button>
+
+        @csrf
+@endsection
+

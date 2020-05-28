@@ -15,7 +15,7 @@ class RegattasController extends Controller
      */
     public function index()
     {
-        $regattas = Regatta::all();
+        $regattas = Regatta::paginate(10);
         return view('regatta.index', compact('regattas'));
     }
 
@@ -38,8 +38,8 @@ class RegattasController extends Controller
      */
     public function store(Request $request)
     {
-        Regatta::creat($this->validateRequest());
-        return redirect('regatta.ingex');
+        $regatta = Regatta::create($this->validateRequest());
+        return redirect('regatta/'.$regatta->id);
     }
 
     /**
@@ -50,7 +50,8 @@ class RegattasController extends Controller
      */
     public function show(Regatta $regatta)
     {
-        return view('regatta.show', compact('regatta'));
+        $competitors = $regatta->competitor()->paginate(20);
+        return view('regatta.show', compact('regatta', 'competitors'));
     }
 
     /**
@@ -74,6 +75,7 @@ class RegattasController extends Controller
     public function update(Request $request, Regatta $regatta)
     {
         $regatta->update($this->validateRequest());
+        return redirect('regatta/'.$regatta->id);
     }
 
     /**
@@ -84,9 +86,9 @@ class RegattasController extends Controller
      */
     public function destroy(Regatta $regatta)
     {
-        Competitor::where('regattaId', $regatta->id)->delete();
+        Competitor::where('regatta_id', $regatta->id)->delete();
         $regatta->delete();
-        return redirect('regatta.index');
+        return redirect('/regatta');
     }
 
     private function validateRequest() {

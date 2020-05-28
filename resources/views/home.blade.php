@@ -22,6 +22,8 @@
                 </div>
             @endforeach
         </div>
+
+        <a href="/course" class="btn btn-block btn-dark">View all</a>
     </div>
 
     <hr class="mt-5">
@@ -41,6 +43,8 @@
                 </div>
             @endforeach
         </div>
+
+        <a href="/article" class="btn btn-block btn-dark">View all</a>
     </div>
 
     <hr class="mt-5">
@@ -60,7 +64,11 @@
                 </div>
             @endforeach
         </div>
+
+        <a href="/coach" class="btn btn-block btn-dark">View all</a>
     </div>
+
+    <hr class="mt-5">
 
     <div class="row my-4">
         <div class="col-lg-12 col-md-12 col-sm-12">

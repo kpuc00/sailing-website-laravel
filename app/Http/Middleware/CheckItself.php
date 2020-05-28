@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class CheckAuthour
+class CheckItself
 {
     /**
      * Handle an incoming request.
@@ -15,21 +15,20 @@ class CheckAuthour
      */
     public function handle($request, Closure $next)
     {
-        $index = 30;
+        $index = 27;
         $url = $request->url();
-        $article_id = $url[$index];
+        $user_id = $url[$index];
         $index++;
 
         while(strlen($request->url()) < $index || $url[$index] != '/') {
-            $article_id .= $request->url()[$index];
+            $user_id .= $request->url()[$index];
             $index++;
         }
 
-        if(auth()->check() && $request->user()->isAuthour($article_id)) {
+        if(auth()->check() && $request->user()->id == $user_id) {
             return $next($request);
         }
 
-        return redirect('login');
-
+        return redirect('/user');
     }
 }
