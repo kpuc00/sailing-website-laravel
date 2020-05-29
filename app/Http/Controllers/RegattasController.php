@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Competitor;
+use App\Events\RegattaDeletedEvent;
 use App\Regatta;
 use Illuminate\Http\Request;
 
@@ -86,6 +87,8 @@ class RegattasController extends Controller
      */
     public function destroy(Regatta $regatta)
     {
+        event(new RegattaDeletedEvent($regatta));
+
         Competitor::where('regatta_id', $regatta->id)->delete();
         $regatta->delete();
         return redirect('/regatta');

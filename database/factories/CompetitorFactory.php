@@ -11,6 +11,7 @@ $factory->define(Competitor::class, function (Faker $faker) {
         'lastName' => $faker->lastName,
         'age' => $faker->numberBetween(10, 30),
         'club' => $faker->word,
+        'email' => $faker->unique()->safeEmail,
         'regatta_id' => factory(\App\Regatta::class)->create(),
     ];
 });
