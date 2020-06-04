@@ -47,7 +47,7 @@
             <div class="media">
                 <img src="storage/coach-img/" class="align-self-center mr-3" alt="...">
                 <div class="media-body">
-                    <h5 class="mt-0">{{ $course->coach->firstName . " " . $course->coach->lastName ?? "No coach for coresponding course yet" }}</h5>
+                    <h5 class="mt-0">{{ $course->coach->firstName ?? "No coach for coresponding course yet" }}</h5>
                     <p>{{ $course->coach->description ?? "No coach description for coresponding course" }}</p>
                 </div>
             </div>

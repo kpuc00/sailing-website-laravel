@@ -7,57 +7,58 @@
         </div>
     </div>
 
+
     <!-- course -->
     <div class="row my-4">
-        <div class="row my-4">
+        <div class="row">
             <div class="col">
                 <p class="h4 text-muted">Some of our courses:</p>
             </div>
         </div>
 
-        <div class="row mx-4">
+        <div class="row m-auto">
             @foreach (App\Course::GetCourses(6) as $course)
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="col-lg-4 col-md-6 col-sm-12 mx-auto">
                     @include('layouts.card.course')
                 </div>
             @endforeach
         </div>
 
-        <a href="/course" class="btn btn-block btn-dark">View all</a>
+        <a href="/course" class="btn btn-block btn-dark my-2">View all</a>
     </div>
 
     <hr class="mt-5">
 
     <!-- article -->
     <div class="row my-4">
-        <div class="row my-4">
+        <div class="row">
             <div class="col">
                 <p class="h4 text-muted">This may intrest you:</p>
             </div>
         </div>
 
-        <div class="row mx-4">
+        <div class="row m-auto">
             @foreach (App\Article::GetArticles(3) as $article)
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="col-lg-4 col-md-6 col-sm-12 mx-auto">
                     @include('layouts.card.article')
                 </div>
             @endforeach
         </div>
 
-        <a href="/article" class="btn btn-block btn-dark">View all</a>
+        <a href="/article" class="btn btn-block btn-dark my-2">View all</a>
     </div>
 
     <hr class="mt-5">
 
     <!-- coach -->
     <div class="row my-4">
-        <div class="row my-4">
+        <div class="row">
             <div class="col">
                 <p class="h4 text-muted">Our newest requitments:</p>
             </div>
         </div>
 
-        <div class="row mx-4">
+        <div class="row m-auto">
             @foreach (App\Coach::GetCoaches(3) as $coach)
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     @include('layouts.card.coach')
@@ -65,7 +66,7 @@
             @endforeach
         </div>
 
-        <a href="/coach" class="btn btn-block btn-dark">View all</a>
+        <a href="/coach" class="btn btn-block btn-dark my-2">View all</a>
     </div>
 
     <hr class="mt-5">

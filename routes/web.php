@@ -51,7 +51,7 @@ Route::delete('course/{course}', 'CoursesController@destroy')->middleware('check
 
 Route::get('coach', 'CoachesController@index');
 Route::get('coach/create', 'CoachesController@create')->middleware('checkAdmin'); // User must be admin to access this
-Route::post('course', 'CoachesController@store');
+Route::post('coach', 'CoachesController@store');
 Route::get('coach/{coach}', 'CoachesController@show');
 Route::get('coach/{coach}/edit', 'CoachesController@edit')->middleware('checkAdmin'); // User must be admin to access this
 Route::patch('coach/{coach}', 'CoachesController@update')->middleware('checkAdmin'); // User must be admin to access this
@@ -92,3 +92,6 @@ Route::get('article/{article}/edit', 'ArticlesController@edit')->middleware('che
 Route::patch('article/{article}', 'ArticlesController@update')->middleware('checkAuthour'); // User must be the author to access this
 Route::delete('article/{article}', 'ArticlesController@destroy')->middleware('checkAuthour'); // User must be the author to access this
 
+// // Edit log routes
+
+Route::get('editlog', 'EditLogsController@index');
