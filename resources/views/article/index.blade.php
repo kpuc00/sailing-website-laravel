@@ -9,7 +9,7 @@
                     <li class="list-group-item" data-role="article">
                         <a href="/article/{{ $article->id }}" class="btn text-dark list-group-item-action">
                             <div class="media">
-                                <img src="storage/artile-img/" class="align-self-center mr-3" alt="...">
+                                <img src="{{ asset('storage/article-img/'.$article->image) }}" class="align-self-center mr-3" alt="...">
                                 <div class="media-body">
                                     <h5 class="mt-0">{{ $article->title }}</h5>
                                     <p>{{ $article->content }}</p>

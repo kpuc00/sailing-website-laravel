@@ -76,6 +76,7 @@ class CoachesController extends Controller
      */
     public function update(Request $request, Coach $coach)
     {
+        dd($request);
         $coach->update($this->validateRequest());
         $this->storeImage($coach);
         $this->assignCourse($coach);
@@ -91,7 +92,7 @@ class CoachesController extends Controller
     public function destroy(Coach $coach)
     {
         $coach->delete();
-        return redirect('coach');
+        return redirect('/coach');
     }
 
     private function validateRequest() {

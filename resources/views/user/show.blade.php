@@ -31,7 +31,7 @@
         <div class="row">
             <div class="col-sm">
                 <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="..." alt="Card image cap">
+                    <img class="card-img-top" src="{{ asset('storage/user-img/'.$user->image) }}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">Profile Picture</h5>
                         <a href="#" class="btn btn-primary">Change picture</a>
@@ -40,35 +40,31 @@
             </div>
 
             <div class="col-8">
-                <form action="">
-
-                    @csrf
+                <form action="/user/{{ $user->id }}" method="POST">
+                    @method('PATCH')
 
                     <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" class="form-control" id="username" aria-describedby="usernameHelp" placeholder="Username">
-                        <small id="usernameHelp" class="form-text text-muted">Your Username.</small>
+                        <label for="username">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" aria-describedby="nameHelp" placeholder="Username" value="{{ old('name') ?? $user->name }}">
+                        <small id="nameHelp" class="form-text text-muted">Your name.</small>
                     </div>
 
                     <div class="form-group">
                         <label for="email">Email address</label>
-                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email">
+                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Email" value="{{ old('email') ?? $user->email }}">
                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                     </div>
 
-                    <div class="form-group">
-                        <label for="phone">Phone</label>
-                        <input type="number" class="form-control" id="phone" aria-describedby="phoneHelp" placeholder="1234567">
-                        <small id="phoneHelp" class="form-text text-muted">Your Number.</small>
-                    </div>
+                    <button class="btn btn-primary">Edit</button>
 
-                    <div class="form-group">
-                        <label for="displayname">Display Name</label>
-                        <input type="text" class="form-control" id="displayname" aria-describedby="displaynameHelp" placeholder="Name">
-                        <small id="displaynameHelp" class="form-text text-muted">Your Display Name.</small>
-                    </div>
-
+                    @csrf
                 </form>
+
+                <form action="/user/{{ $user->id }}" class="my-4">
+                    @method('DELETE')
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+
             </div>
         </div>
 

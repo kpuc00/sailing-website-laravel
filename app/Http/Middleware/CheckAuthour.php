@@ -17,11 +17,11 @@ class CheckAuthour
     {
         $index = 30;
         $url = $request->url();
-        $article_id = $url[$index];
-        $index++;
+        $article_id = "";
 
-        while(strlen($request->url()) < $index || $url[$index] != '/') {
-            $article_id .= $request->url()[$index];
+
+        while(strlen($request->url()) > $index && $url[$index] != '/') {
+            $article_id .= $url[$index];
             $index++;
         }
 

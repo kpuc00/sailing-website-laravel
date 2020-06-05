@@ -9,5 +9,6 @@ $factory->define(Course::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'description' => $faker->realText(),
+        'image' => 'default.png',
     ];
 });

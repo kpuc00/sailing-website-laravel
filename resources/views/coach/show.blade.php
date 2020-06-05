@@ -15,9 +15,10 @@
                             <a href="/coach/{{ $coach->id }}/edit" class="btn btn-primary mt-4">Edit coach</a>
                         </div>
                         <div class="col-lg-6 col-md-6 coc-sm-6">
-                            <form action="/coach/{{ $coach->id }}">
+                            <form action="/coach/{{ $coach->id }}" method="POST">
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger mt-4 float-right d-inline">Delete</button>
+                                @csrf
                             </form>
                         </div>
                     </div>

@@ -16,19 +16,20 @@ class CheckItself
     public function handle($request, Closure $next)
     {
         $index = 27;
-        $url = $request->url();
-        $user_id = $url[$index];
-        $index++;
 
-        while(strlen($request->url()) < $index || $url[$index] != '/') {
-            $user_id .= $request->url()[$index];
+        $url = $request->url();
+        $user_id = "";
+
+        while(strlen($url) > $index && $url[$index] != '/' ) {
+            $user_id .= $url[$index];
             $index++;
         }
+
 
         if(auth()->check() && $request->user()->id == $user_id) {
             return $next($request);
         }
 
-        return redirect('/user');
+        return redirect('/home');
     }
 }

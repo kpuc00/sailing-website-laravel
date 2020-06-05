@@ -25,7 +25,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        // not used
+        // See register controller
     }
 
     /**
@@ -58,7 +58,7 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        return view('user.edit', compact('user'));
+        // Not used
     }
 
     /**
@@ -72,7 +72,7 @@ class UsersController extends Controller
     {
         $user->update($this->validateRequest());
         $this->storeImage($user);
-        return redirect('user.show/'.$user->id);
+        return redirect('user/'.$user->id);
     }
 
     /**

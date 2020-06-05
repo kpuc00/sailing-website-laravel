@@ -29,7 +29,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('user', 'UsersController@index');
 // Route::get('user/create', 'UsersController@create')->middleware('checkAdmin'); // User must be itself to access this
 Route::post('user', 'UsersController@store');
-Route::get('user/{user}', 'UsersController@show');
+Route::get('user/{user}', 'UsersController@show')->middleware('checkItself');
 Route::get('user/{user}/edit', 'UsersController@edit')->middleware('checkItself'); // User must be itself to access this
 Route::patch('user/{user}', 'UsersController@update')->middleware('checkItself'); // User must be itself to access this
 Route::delete('user/{user}', 'UsersController@destroy')->middleware('checkItself'); // User must be itself to access this
