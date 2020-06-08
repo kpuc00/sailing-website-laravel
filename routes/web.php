@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,7 @@ Route::post('user', 'UsersController@store');
 Route::get('user/{user}', 'UsersController@show')->middleware('checkItself');
 Route::get('user/{user}/edit', 'UsersController@edit')->middleware('checkItself'); // User must be itself to access this
 Route::patch('user/{user}', 'UsersController@update')->middleware('checkItself'); // User must be itself to access this
+Route::patch('user/{user}/changeRole', 'UsersController@changeRole')->middleware('checkAdmin'); // User must be admin to access this
 Route::delete('user/{user}', 'UsersController@destroy')->middleware('checkItself'); // User must be itself to access this
 
 // // Course routes

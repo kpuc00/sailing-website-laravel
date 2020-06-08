@@ -46,6 +46,10 @@ class User extends Authenticatable
         return $this->id == $article[0]->user_id;
     }
 
+    public static function GetAllNotSelf(User $user) {
+        return User::where('id', '!=', $user->id)->get();
+    }
+
     public function article() {
         return $this->hasMany(Article::class);
     }

@@ -45,7 +45,8 @@
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="media">
-                <img src="{{ asset('storage/coach-img/'.$course->coach->image) }}" width="200" height="200" class="align-self-center mr-3" alt="...">
+
+                <img src="{{ asset('storage/coach-img/'. $course->coach->image ?? '') }}" width="200" height="200" class="align-self-center mr-3" alt="...">
                 <div class="media-body">
                     <h5 class="mt-0">{{ $course->coach->firstName ?? "No coach for coresponding course yet" }}</h5>
                     <p>{{ $course->coach->description ?? "No coach description for coresponding course" }}</p>

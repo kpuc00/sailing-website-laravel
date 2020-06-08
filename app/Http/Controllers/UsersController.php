@@ -75,6 +75,14 @@ class UsersController extends Controller
         return redirect('user/'.$user->id);
     }
 
+    public function changeRole(Request $request, User $user)
+    {
+        $newRole = $user->role == 'admin' ? 'user' : 'admin';
+        $user->role = $newRole;
+        $user->save();
+        return back();
+    }
+
     /**
      * Remove the specified resource from storage.
      *

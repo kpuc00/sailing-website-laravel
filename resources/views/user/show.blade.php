@@ -19,6 +19,13 @@
                 <li class="nav-item">
                     <a class="nav-link" id="pills-contact-tab" href="/article" role="tab" aria-controls="pills-contact" aria-selected="false">Articles</a>
                 </li>
+
+                @if ($user->isAdmin())
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-contact-tab" href="/user" role="tab" aria-controls="pills-contact" aria-selected="false">Accounts</a>
+                    </li>
+                @endif
+
             </ul>
         </div>
 
@@ -31,16 +38,15 @@
         <div class="row">
             <div class="col-sm">
                 <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="{{ asset('storage/user-img/'.$user->image) }}" alt="Card image cap">
+                    <img class="card-img-top" src="{{ asset('storage/'.$user->image) }}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">Profile Picture</h5>
-                        <a href="#" class="btn btn-primary">Change picture</a>
                     </div>
                 </div>
             </div>
 
             <div class="col-8">
-                <form action="/user/{{ $user->id }}" method="POST">
+                <form action="/user/{{ $user->id }}" method="POST" enctype="multipart/form-data">
                     @method('PATCH')
 
                     <div class="form-group">
@@ -53,6 +59,16 @@
                         <label for="email">Email address</label>
                         <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Email" value="{{ old('email') ?? $user->email }}">
                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+
+                    <!-- [image] -->
+                    <div class="form-group d-flex flex-column">
+                        <label for="">Image:</label>
+                        <input type="file" id="image" name="image">
+
+                        @if($errors->has('image'))
+                            <label class="alert alert-warning" role="alert">{{ $errors->first('image') }}</label>
+                        @endif
                     </div>
 
                     <button class="btn btn-primary">Edit</button>
