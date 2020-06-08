@@ -27,7 +27,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 // // User routes
 // Route::resource('user', 'CoursesController');
 
-Route::get('user', 'UsersController@index');
+Route::get('user', 'UsersController@index')->middleware('checkAdmin'); // User must be admin to access this
 // Route::get('user/create', 'UsersController@create')->middleware('checkAdmin'); // User must be itself to access this
 Route::post('user', 'UsersController@store');
 Route::get('user/{user}', 'UsersController@show')->middleware('checkItself');
