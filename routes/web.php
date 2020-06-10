@@ -94,6 +94,14 @@ Route::get('article/{article}/edit', 'ArticlesController@edit')->middleware('che
 Route::patch('article/{article}', 'ArticlesController@update')->middleware('checkAuthour'); // User must be the author to access this
 Route::delete('article/{article}', 'ArticlesController@destroy')->middleware('checkAuthour'); // User must be the author to access this
 
+
+// // Announcement routes
+
+Route::get('/announcement', 'AnnouncementController@index');
+Route::get('announcement/create', 'AnnouncementController@create');
+Route::post('announcement', 'AnnouncementController@store');
+Route::get('announcement/{announcement}', 'AnnouncementController@show');
+
 // // Edit log routes
 
 Route::get('editlog', 'EditLogsController@index');
