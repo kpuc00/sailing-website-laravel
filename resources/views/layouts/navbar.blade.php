@@ -53,7 +53,7 @@
                 <a class="nav-link" href="/article">Articles</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Anouncments</a>
+                <a class="nav-link" href="/announcement">Anouncments</a>
             </li>
 
             <!-- Authentication Links -->

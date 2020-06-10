@@ -97,10 +97,12 @@ Route::delete('article/{article}', 'ArticlesController@destroy')->middleware('ch
 
 // // Announcement routes
 
-Route::get('/announcement', 'AnnouncementController@index');
+Route::get('announcement', 'AnnouncementController@index');
 Route::get('announcement/create', 'AnnouncementController@create');
 Route::post('announcement', 'AnnouncementController@store');
 Route::get('announcement/{announcement}', 'AnnouncementController@show');
+Route::get('announcement/{announcement}/edit', 'AnnouncementController@edit');
+Route::patch('/announcement/{announcement}', 'AnnouncementController@update');
 
 // // Edit log routes
 
