@@ -62,7 +62,7 @@ class AnnouncementController extends Controller
     private function validateRequest() {
         return tap(request()->validate([
             'title' => 'required|max:256',
-            'content' => 'required|min:256:max:2048',
+            'content' => 'required|max:256',
             'user_id' => 'required',
         ]), function() {
             if(request()->hasFile('image')) {
