@@ -45,6 +45,12 @@ class AnnouncementController extends Controller
         return redirect('announcement/'.$request->id);
     }
 
+    public function destroy(Announcement $announcement)
+    {
+        $announcement->delete();
+        return redirect('announcement');
+    }
+
     private function storeImage($announcement) {
         if(request()->has('image')) {
             $announcement->update([
@@ -56,7 +62,7 @@ class AnnouncementController extends Controller
     private function validateRequest() {
         return tap(request()->validate([
             'title' => 'required|max:256',
-            'content' => 'required|max:2048',
+            'content' => 'required|min:256:max:2048',
             'user_id' => 'required',
         ]), function() {
             if(request()->hasFile('image')) {

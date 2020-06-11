@@ -103,6 +103,7 @@ Route::post('announcement', 'AnnouncementController@store');
 Route::get('announcement/{announcement}', 'AnnouncementController@show');
 Route::get('announcement/{announcement}/edit', 'AnnouncementController@edit');
 Route::patch('/announcement/{announcement}', 'AnnouncementController@update');
+Route::delete('/announcement/{announcement}', 'AnnouncementController@destroy');
 
 // // Edit log routes
 

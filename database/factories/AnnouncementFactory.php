@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(\App\Announcement::class, function (Faker $faker) {
     return [
         'title' => $faker->text(20),
-        'content' => $faker->paragraph(),
+        'content' => $faker->realText(),
         'user_id' => factory(\App\User::class)->create(),
         'image' => 'default.png',
     ];

@@ -27,6 +27,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <form action="/announcement/{{ $announcement->id }}" method="POST">
                         @method('DELETE')
+                        @csrf
                         <button type="submit" class="btn btn-danger float-right">Delete</button>
                     </form>
                 </div>
