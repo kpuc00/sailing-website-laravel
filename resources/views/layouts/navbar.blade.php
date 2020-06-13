@@ -9,7 +9,7 @@
         <ul class="navbar-nav">
 
             <li class="nav-item">
-                <a class="nav-link" href="#">About us</a>
+                <a class="nav-link" href="/aboutus">About us</a>
             </li>
 
             <!-- Courses nav item -->
