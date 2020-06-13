@@ -1,5 +1,5 @@
 <div class="card  my-2 mx-auto" style="width: 18rem;">
-    <img class="card-img-top" src="{{ asset('storage/article-img/'.$article->image) }}" alt="Card image cap">
+    <img class="card-img-top" src="{{ asset('storage/'.$article->image) }}" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title">{{ $article->title }}</h5>
       <p class="card-text">{{ Substr($article->content, 0, strlen($article->content) - 50). '...' }}</p>

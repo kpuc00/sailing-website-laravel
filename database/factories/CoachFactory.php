@@ -11,6 +11,6 @@ $factory->define(Coach::class, function (Faker $faker) {
         'lastName' => $faker->lastName,
         'description' => $faker->realText(),
         'course_id' => factory(\App\Course::class)->create(),
-        'image' => 'default.png',
+        'image' => 'coach-img/default.png',
     ];
 });
