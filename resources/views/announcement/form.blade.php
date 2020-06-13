@@ -28,7 +28,7 @@
         @endif
     </div>
 
-    <input type="text" id="user_id"  name="user_id" value="{{$announcement->user->id}}" hidden>
+    <input type="text" id="user_id"  name="user_id" value="{{$announcement->user->id ?? 1}}" hidden>
 
     <button class="btn btn-primary mt-4" type="submit">Submit</button>
 

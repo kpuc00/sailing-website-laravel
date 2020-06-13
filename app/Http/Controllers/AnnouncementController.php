@@ -22,7 +22,7 @@ class AnnouncementController extends Controller
 
     public function store(Request $request)
     {
-        dd($request);
+        //dd($request);
         $announcement = Announcement::create($this->validateRequest());
         $this->storeImage($announcement);
         return redirect('announcement/'.$announcement->id);
