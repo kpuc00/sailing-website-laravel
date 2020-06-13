@@ -16,7 +16,14 @@ class AboutUsController extends Controller
     public function create()
     {
         $about = new AboutUs();
-        return view('about_us.create', compact('about'));
+        $ifExist = AboutUs::all();
+        
+        if ($ifExist->count() > 0) {
+            return redirect('/aboutus');
+        }
+        else {
+            return view('about_us.create', compact('about'));
+        }        
     }
 
     public function store(Request $request)
