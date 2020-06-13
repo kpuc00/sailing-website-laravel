@@ -40,10 +40,9 @@ Route::delete('user/{user}', 'UsersController@destroy')->middleware('checkItself
 Route::get('aboutus', 'AboutUsController@index');
 Route::get('aboutus/create', 'AboutUsController@create')->middleware('checkAdmin'); // User must be admin to access this
 Route::post('aboutus', 'AboutUsController@store');
-Route::get('aboutus/{aboutus}', 'AboutUsController@show');
-Route::get('aboutus/{aboutus}/edit', 'AboutUsController@edit')->middleware('checkAdmin'); // User must be admin to access this
-Route::patch('aboutus/{aboutus}', 'AboutUsController@update')->middleware('checkAdmin'); // User must be admin to access this
-Route::delete('aboutus/{aboutus}', 'AboutUsController@destroy')->middleware('checkAdmin'); // User must be admin to access this
+Route::get('aboutus/{about}/edit', 'AboutUsController@edit')->middleware('checkAdmin'); // User must be admin to access this
+Route::patch('aboutus/{about}', 'AboutUsController@update')->middleware('checkAdmin'); // User must be admin to access this
+Route::delete('aboutus/{about}', 'AboutUsController@destroy')->middleware('checkAdmin'); // User must be admin to access this
 
 // // Course routes
 // Route::resource('course', 'CoursesController');
