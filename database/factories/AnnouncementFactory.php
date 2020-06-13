@@ -2,14 +2,14 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Article;
+use App\Model;
 use Faker\Generator as Faker;
 
-$factory->define(Article::class, function (Faker $faker) {
+$factory->define(\App\Announcement::class, function (Faker $faker) {
     return [
         'title' => $faker->text(20),
-        'content' => $faker->paragraph(),
+        'content' => $faker->realText(),
         'user_id' => factory(\App\User::class)->create(),
-        'image' => 'article-img/default.png',
+        'image' => 'default.png',
     ];
 });
