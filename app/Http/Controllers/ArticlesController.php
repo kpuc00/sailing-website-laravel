@@ -38,7 +38,6 @@ class ArticlesController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
         $article = Article::create($this->validateRequest());
         $this->storeImage($article);
         return redirect('article/'.$article->id);
@@ -77,7 +76,7 @@ class ArticlesController extends Controller
     {
         $article->update($this->validateRequest());
         $this->storeImage($article);
-        return redirect('article.show/'.$request->id);
+        return redirect('article/'.$request->id);
     }
 
     /**

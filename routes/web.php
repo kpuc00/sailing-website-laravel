@@ -95,7 +95,7 @@ Route::delete('regatta/{regatta}', 'RegattasController@destroy')->middleware('ch
 // Route::resource('article', 'ArticlesController')->middleware('checkAuthour');
 
 Route::get('article', 'ArticlesController@index');
-Route::get('article/create', 'ArticlesController@create')->middleware('checkAuthour'); // User must be the author to access this
+Route::get('article/create', 'ArticlesController@create')->middleware('auth');
 Route::post('article', 'ArticlesController@store');
 Route::get('article/{article}', 'ArticlesController@show');
 Route::get('article/{article}/edit', 'ArticlesController@edit')->middleware('checkAuthour'); // User must be the author to access this

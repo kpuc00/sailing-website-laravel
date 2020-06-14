@@ -10,6 +10,6 @@ $factory->define(\App\Announcement::class, function (Faker $faker) {
         'title' => $faker->text(20),
         'content' => $faker->realText(),
         'user_id' => factory(\App\User::class)->create(),
-        'image' => 'default.png',
+        'image' => 'announcement-img/default.png',
     ];
 });

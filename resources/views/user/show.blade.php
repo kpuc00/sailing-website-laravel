@@ -20,6 +20,10 @@
                     <a class="nav-link" id="pills-contact-tab" href="/article" role="tab" aria-controls="pills-contact" aria-selected="false">Articles</a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-home-tab" href="/announcement" role="tab" aria-controls="pills-home" aria-selected="true">Announcements</a>
+                </li>
+
                 @if ($user->isAdmin())
                     <li class="nav-item">
                         <a class="nav-link" id="pills-contact-tab" href="/user" role="tab" aria-controls="pills-contact" aria-selected="false">Accounts</a>

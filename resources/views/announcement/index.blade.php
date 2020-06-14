@@ -17,7 +17,7 @@
                     <li class="list-group-item" data-role="announcement">
                         <a href="/announcement/{{ $announcement->id }}" class="btn text-dark list-group-item-action">
                             <div class="media">
-                                <img src="{{ asset('storage/announcement-img/'.$announcement->image) }}" class="align-self-center mr-3" alt="...">
+                                <img src="{{ asset('storage/'.$announcement->image) }}" class="align-self-center mr-3" alt="...">
                                 <div class="media-body">
                                     <h5 class="mt-0">{{ $announcement->title }}</h5>
                                     <p>{{ $announcement->content }}</p>

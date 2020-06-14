@@ -16,7 +16,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-6 my-2 mx-auto">
 
                         <div class="card" style="width: 18rem;">
-                            <img src="..." class="card-img-top" alt="...">
+                            <img src="{{ asset('storage/'.$user->image) }}" class="card-img-top" alt="...">
                             <div class="card-body">
                             <h5 class="card-title">{{ $user->name }}</h5>
 
